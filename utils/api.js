@@ -1,11 +1,12 @@
 import axios from "axios";
 
-const api = axios.create({baseURL:"https://rss.applemarketingtools.com/api/v2"})
+const api = axios.create({baseURL:"https://itunes.apple.com"})
 
 function getTop100Albums(country = "us"){
-    return api.get(`/${country}/music/most-played/100/albums.json`)
+    return api.get(`/${country}/rss/topalbums/limit=100/json`)
     .then(({data})=>{
-        return data.feed.results
+        console.log(data)
+        return data.feed.entry
     })
 }
 
