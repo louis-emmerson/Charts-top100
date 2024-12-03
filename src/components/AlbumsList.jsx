@@ -3,46 +3,90 @@ import AlbumCard from "./AlbumCard"
 import { getTop100Albums } from "../../utils/api"
 import ErrorAlert from "./ErrorAlert"
 import AlbumCardSkeleton from "./AlbumCardSkeleton"
+import InfoAlert from "./InfoAlert"
 
-function AlbumsList() {
+function AlbumsList({ searchInput,setSearchInput }) {
   const [albums, setAlbums] = useState(null)
   const [loading, isLoading] = useState(true)
-  const [isError, setIsError] =useState(false)
+  const [isError, setIsError] = useState(false)
+  const [searchResults, setSearchResults] = useState(null)
 
   useEffect(() => {
     isLoading(true)
-    getTop100Albums().then((albums) => {
-        const modifiedAlbums = albums.map((album, index)=>{
-            album.chartPosition = index +1
-            return album
+    getTop100Albums()
+      .then((albums) => {
+        const modifiedAlbums = albums.map((album, index) => {
+          album.chartPosition = index + 1
+          return album
         })
         setAlbums(modifiedAlbums)
         isLoading(false)
-    }).catch((error)=>{
+      })
+      .catch((error) => {
         setIsError("Failed to fetch albums")
-    })
+      })
   }, [])
 
-  if(isError){
-    return <ErrorAlert errorMsg={isError}/>
+  useEffect(() => {
+    if (!searchInput) setSearchResults(null)
+    if (albums) {
+      const filteredResults = albums.filter(
+        (album) =>
+          album["im:artist"].label
+            .toLowerCase()
+            .includes(searchInput.toLowerCase()) ||
+          album["im:name"].label
+            .toLowerCase()
+            .includes(searchInput.toLowerCase())
+      )
+      setSearchResults(filteredResults)
+    }
+  }, [searchInput])
+
+  if (isError) {
+    return <ErrorAlert errorMsg={isError} />
   }
 
   if (loading)
     return (
-      <div className="flex flex-wrap gap-4 justify-center pr-4 pl-4">
-        {new Array(50).fill(null).map((album)=>{
-            return <AlbumCardSkeleton/>
+      <div className="flex flex-wrap gap-4 justify-center p-4">
+        {new Array(50).fill(null).map((album, index) => {
+          return <AlbumCardSkeleton key={`skelton-${index}`} />
         })}
       </div>
     )
 
-  return (
-    <div className="flex flex-wrap gap-4 justify-center pr-4 pl-4 bg-c">
-      {albums.map((album)=>{
-        return <AlbumCard album={album}/>
-      })}
-    </div>
-  )
+  if (albums && !searchInput)
+    return (
+      <div className="flex flex-wrap gap-4 justify-center p-4">
+        {albums.map((album) => {
+          return (
+            <AlbumCard
+              album={album}
+              key={`album-${album.id.attributes["im:id"]}`}
+            />
+          )
+        })}
+      </div>
+    )
+
+    if (searchInput) {
+      return searchResults && searchResults.length > 0 ? (
+        <div className="flex flex-wrap gap-4 justify-center p-4">
+          {searchResults.map((album) => (
+            <AlbumCard
+              album={album}
+              key={`album-${album.id.attributes["im:id"]}`}
+            />
+          ))}
+        </div>
+      ) : (
+        <InfoAlert setSearchInput={setSearchInput} />
+      );
+    }
+    
+    
+ 
 }
 
 export default AlbumsList

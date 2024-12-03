@@ -1,10 +1,11 @@
 import AlbumsList from "../components/AlbumsList"
 
-function Top100Albums(){
-    return <>
-    <h1>Top 100 Albums</h1>
-    <AlbumsList />
-    </>
+function Top100Albums({searchInput,setSearchInput}){
+    return( 
+    <section>
+        {searchInput?<h1 className=" text-center text-black font-medium text-2xl pt-4"> Search results for: {searchInput}</h1>:null}
+        <AlbumsList searchInput={searchInput} setSearchInput={setSearchInput} />
+    </section>)
 }
 
 export default Top100Albums
