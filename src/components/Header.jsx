@@ -1,18 +1,18 @@
 import { useState } from "react"
+import countries from "../data/countrys"
 
-function Header({searchInput, setSearchInput}) {
+function Header({ searchInput, setSearchInput }) {
   const [nav, setNav] = useState(false)
 
   return (
     <header className="sticky top-0 shadow-xl z-10">
-      <nav className="bg-gray-800 border-gray-200 px-4 lg:px-6 py-2.5" >
+      <nav className="bg-gray-800 border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg">
           <a href="#" className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               Itunes Top 100 Albums
             </span>
           </a>
-
           <div
             className={`flex-col md:flex md:flex-row items-center w-full md:w-auto md:order-2 transition-all duration-300 ${
               nav
@@ -25,19 +25,30 @@ function Header({searchInput, setSearchInput}) {
                 placeholder="Search Albums..."
                 className="w-full outline-none bg-white pl-4 text-sm"
                 value={searchInput}
-                onChange={(event)=>{
-                    setSearchInput(event.target.value)
+                onChange={(event) => {
+                  setSearchInput(event.target.value)
                 }}
               />
               <button
                 type="button"
-                onClick={()=>{
-                    setSearchInput("")
+                onClick={() => {
+                  setSearchInput("")
                 }}
                 className="bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm rounded-full px-5 py-2.5 w-40"
               >
-                {searchInput?"Clear":"Search"}
+                {searchInput ? "Clear" : "Search"}
               </button>
+            </div>
+            <div className="bg-white flex px-1 py-1 ml-2 rounded-full border  overflow-hidden  mx-auto font-[sans-serif] max-w-30">
+              <select className=" outline-none bg-white pl-4 text-3xl px-5  w-30 ">
+                {countries.map((country)=>{
+
+                  if(country[0] === "us") return <option key={country[0]} selected="selected" value={country[0]}>{country[1]}</option>
+
+                  return <option key={country[0]} value={country[0]}>{country[1]}</option>
+                })}
+                
+              </select>
             </div>
           </div>
 
@@ -55,10 +66,7 @@ function Header({searchInput, setSearchInput}) {
                   className="size-8 stroke-2 fill-none stroke-white"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
-                    
-                  />
+                  <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" />
                 </svg>
               }
             </button>
