@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import AlbumCard from "./AlbumCard"
 import { getTop100Albums } from "../../utils/api"
 import ErrorAlert from "./ErrorAlert"
 import AlbumCardSkeleton from "./AlbumCardSkeleton"
 import InfoAlert from "./InfoAlert"
+import CountryContext from "../context/county-context"
 
-function AlbumsList({ searchInput,setSearchInput, countryInput }) {
+function AlbumsList({ searchInput,setSearchInput }) {
   const [albums, setAlbums] = useState(null)
   const [loading, isLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [searchResults, setSearchResults] = useState(null)
+  const countryInput = useContext(CountryContext)
 
   useEffect(() => {
     setIsError(false)
