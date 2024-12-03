@@ -8,7 +8,7 @@ function App() {
   return (
     <section>
       <Header searchInput={searchInput} setSearchInput={setSearchInput}/>
-      <Top100Albums searchInput={searchInput}/>
+      <Top100Albums searchInput={searchInput} setSearchInput={setSearchInput}/>
     </section>
   )
 }
