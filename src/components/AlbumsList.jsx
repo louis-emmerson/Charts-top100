@@ -50,7 +50,7 @@ function AlbumsList({ searchInput,setSearchInput, countryInput }) {
 
   if (loading)
     return (
-      <div className="flex flex-wrap gap-4 justify-center p-4">
+      <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
         {new Array(50).fill(null).map((album, index) => {
           return <AlbumCardSkeleton key={`skelton-${index}`} />
         })}
@@ -59,7 +59,7 @@ function AlbumsList({ searchInput,setSearchInput, countryInput }) {
 
   if (albums && !searchInput)
     return (
-      <div className="flex flex-wrap gap-4 justify-center p-4">
+      <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
         {albums.map((album) => {
           return (
             <AlbumCard
@@ -73,7 +73,7 @@ function AlbumsList({ searchInput,setSearchInput, countryInput }) {
 
     if (searchInput) {
       return searchResults && searchResults.length > 0 ? (
-        <div className="flex flex-wrap gap-4 justify-center p-4">
+        <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
           {searchResults.map((album) => (
             <AlbumCard
               album={album}
