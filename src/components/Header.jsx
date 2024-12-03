@@ -21,7 +21,7 @@ function Header({
           <div
             className={`flex-col md:flex md:flex-row items-center w-full md:w-auto md:order-2 transition-all duration-300 ${
               nav
-                ? "absolute top-16 left-0 w-full bg-gray-700 shadow-md p-4 md:relative md:top-0 md:w-auto md:bg-transparent md:shadow-none"
+                ? "absolute top-16 left-0  bg-gray-700 shadow-md p-4 md:relative md:top-0 md:w-auto md:bg-transparent md:shadow-none"
                 : "hidden md:flex gap-1"
             }`}
           >
@@ -44,18 +44,27 @@ function Header({
                 {searchInput ? "Clear" : "Search"}
               </button>
             </div>
-            <div className="bg-white flex px-1 py-1 ml-2 rounded-full border  overflow-hidden  mx-auto font-[sans-serif] max-w-30">
-              <select className=" outline-none bg-white pl-4 text-3xl px-5  w-30 " value={countryInput} onChange={(event)=>{
-                setCountryInput(event.target.value)
-              }}>
-                {countries.map((country) => {
-                  return (
-                    <option key={country[0]} value={country[0]}>
-                      {country[1]}
-                    </option>
-                  )
-                })}
-              </select>
+            <div className={`flex items-center`}>
+              <div
+                className={`bg-white flex px-1 py-1 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] ${nav?"max-w-md mt-1":"ml-1 w-44"}`}
+              >
+                <select
+                  className=" outline-none bg-white pl-4 text-sm px-5 py-2.5  w-full "
+                  value={countryInput}
+                  
+                  onChange={(event) => {
+                    setCountryInput(event.target.value)
+                  }}
+                >
+                  {countries.map((country) => {
+                    return (
+                      <option key={country[0]} value={country[0]}>
+                        {country[1]}
+                      </option>
+                    )
+                  })}
+                </select>
+              </div>
             </div>
           </div>
 
