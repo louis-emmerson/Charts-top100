@@ -5,15 +5,16 @@ import ErrorAlert from "./ErrorAlert"
 import AlbumCardSkeleton from "./AlbumCardSkeleton"
 import InfoAlert from "./InfoAlert"
 
-function AlbumsList({ searchInput,setSearchInput }) {
+function AlbumsList({ searchInput,setSearchInput, countryInput }) {
   const [albums, setAlbums] = useState(null)
   const [loading, isLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [searchResults, setSearchResults] = useState(null)
 
   useEffect(() => {
+    setIsError(false)
     isLoading(true)
-    getTop100Albums()
+    getTop100Albums(countryInput)
       .then((albums) => {
         const modifiedAlbums = albums.map((album, index) => {
           album.chartPosition = index + 1
@@ -25,7 +26,7 @@ function AlbumsList({ searchInput,setSearchInput }) {
       .catch((error) => {
         setIsError("Failed to fetch albums")
       })
-  }, [])
+  }, [countryInput])
 
   useEffect(() => {
     if (!searchInput) setSearchResults(null)

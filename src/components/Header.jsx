@@ -1,7 +1,12 @@
 import { useState } from "react"
 import countries from "../data/countrys"
 
-function Header({ searchInput, setSearchInput }) {
+function Header({
+  searchInput,
+  setSearchInput,
+  countryInput,
+  setCountryInput,
+}) {
   const [nav, setNav] = useState(false)
 
   return (
@@ -40,14 +45,16 @@ function Header({ searchInput, setSearchInput }) {
               </button>
             </div>
             <div className="bg-white flex px-1 py-1 ml-2 rounded-full border  overflow-hidden  mx-auto font-[sans-serif] max-w-30">
-              <select className=" outline-none bg-white pl-4 text-3xl px-5  w-30 ">
-                {countries.map((country)=>{
-
-                  if(country[0] === "us") return <option key={country[0]} selected="selected" value={country[0]}>{country[1]}</option>
-
-                  return <option key={country[0]} value={country[0]}>{country[1]}</option>
+              <select className=" outline-none bg-white pl-4 text-3xl px-5  w-30 " value={countryInput} onChange={(event)=>{
+                setCountryInput(event.target.value)
+              }}>
+                {countries.map((country) => {
+                  return (
+                    <option key={country[0]} value={country[0]}>
+                      {country[1]}
+                    </option>
+                  )
                 })}
-                
               </select>
             </div>
           </div>
