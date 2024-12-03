@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Header() {
+function Header({searchInput, setSearchInput}) {
   const [nav, setNav] = useState(false)
 
   return (
@@ -24,13 +24,19 @@ function Header() {
               <input
                 placeholder="Search Albums..."
                 className="w-full outline-none bg-white pl-4 text-sm"
+                value={searchInput}
+                onChange={(event)=>{
+                    setSearchInput(event.target.value)
+                }}
               />
               <button
                 type="button"
-                onClick={() => setNav(!nav)}
-                className="bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm rounded-full px-5 py-2.5"
+                onClick={()=>{
+                    setSearchInput("")
+                }}
+                className="bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm rounded-full px-5 py-2.5 w-40"
               >
-                Search
+                {searchInput?"Clear":"Search"}
               </button>
             </div>
           </div>
