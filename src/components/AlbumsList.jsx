@@ -29,7 +29,7 @@ function AlbumsList() {
 
   if (loading)
     return (
-      <div className="flex flex-wrap gap-4 justify-center pr-4 pl-4">
+      <div className="flex flex-wrap gap-4 justify-center p-4">
         {new Array(50).fill(null).map((album)=>{
             return <AlbumCardSkeleton/>
         })}
@@ -37,7 +37,7 @@ function AlbumsList() {
     )
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center pr-4 pl-4 bg-c">
+    <div className="flex flex-wrap gap-4 justify-center p-4 bg-c">
       {albums.map((album)=>{
         return <AlbumCard album={album}/>
       })}
