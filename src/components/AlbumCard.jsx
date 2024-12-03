@@ -11,7 +11,7 @@ function AlbumCard({ album }) {
   
     return (
       <div
-        className="w-full h-56 hover:h-80 md:size-72 md:hover:h-72 rounded-2xl"
+        className="w-full h-56 hover:h-80 md:size-72 md:hover:h-72 rounded-2xl z-0"
         style={{
           backgroundImage:
             image.length > 0 ? `url(${image[image.length - 1].label})` : "none",
@@ -26,14 +26,14 @@ function AlbumCard({ album }) {
             </div>
         
         
-          <h2 className="z-10 mt-3 text-3xl font-bold text-white truncate drop-shadow-xl">
+          <h2 className="mt-3 text-3xl font-bold text-white truncate drop-shadow-xl">
             {chartPosition}
           </h2>
           <div>
-            <h3 className="z-10 text-xl font-bold text-white truncate drop-shadow-xl">
+            <h3 className="text-xl font-bold text-white truncate drop-shadow-xl">
               {title.label}
             </h3>
-            <p className="z-10 overflow-hidden text-sm leading-6 text-white truncate drop-shadow-xl">
+            <p className="overflow-hidden text-sm leading-6 text-white truncate drop-shadow-xl">
               {artist.label}
             </p>
           </div>
