@@ -30,6 +30,10 @@ function AlbumsList() {
   }
 
   const renderAlbumCards = (albums) => {
+    if (albums.length === 0) {
+      if (favoritesToggle) return <InfoAlert infoMsg="You have no favorites!" />
+      return <InfoAlert />
+    }
     return albums.map((album) => {
       return (
         <AlbumCard
@@ -135,7 +139,7 @@ function AlbumsList() {
         </div>
       </div>
     ) : (
-      <InfoAlert />
+      <InfoAlert infoMsg={`No results found matching: ${searchInput}!`} />
     )
   }
 }
