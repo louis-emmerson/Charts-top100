@@ -1,5 +1,6 @@
 import { useState } from "react"
 import countries from "../data/countrys"
+import ToggleSwitch from "./ToggleSwitch"
 
 function Header({
   searchInput,
@@ -7,10 +8,8 @@ function Header({
   countryInput,
   setCountryInput,
   nav,
-  setNav
+  setNav,
 }) {
-  
-
   return (
     <header className="sticky top-0 shadow-xl z-10">
       <nav className="bg-gray-800  border-gray-200 px-4 lg:px-6 py-2.5">
@@ -21,7 +20,7 @@ function Header({
             </span>
           </a>
           <div
-            className={`flex-col md:flex md:flex-row items-center w-full md:w-auto md:order-2 transition-all duration-300 ${
+            className={`flex-col gap-1 md:flex md:flex-row items-center w-full md:w-auto md:order-2 transition-all duration-300 ${
               nav
                 ? "absolute top-16 left-0  bg-gray-700 shadow-md p-4 md:relative md:top-0 md:w-auto md:bg-transparent md:shadow-none"
                 : "hidden md:flex gap-1"
@@ -46,14 +45,22 @@ function Header({
                 {searchInput ? "Clear" : "Search"}
               </button>
             </div>
-            <div className={`flex items-center`}>
+            <div className={`flex items-center gap-2`}>
               <div
-                className={`bg-white flex px-1 py-1 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] ${nav?"max-w-md mt-1":"ml-1 w-44"}`}
+                className={`bg-white flex justify-center w-52 h-12 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] items-center gap-1 ${nav ? "mt-1" : "ml-1"}`}
+              >
+                Show Favorites
+                <ToggleSwitch />
+                
+              </div>
+            </div>
+            <div className={`flex items-center gap-2`}>
+              <div
+                className={`bg-white flex px-1 py-1 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] ${nav ? "max-w-md mt-1" : "ml-1 w-44"}`}
               >
                 <select
-                  className=" outline-none bg-white pl-4 text-sm px-5 py-2.5  w-full "
+                  className=" outline-none bg-white pl-4 text-sm px-5 py-2.5 w-full "
                   value={countryInput}
-                  
                   onChange={(event) => {
                     setCountryInput(event.target.value)
                   }}
