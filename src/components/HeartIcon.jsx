@@ -15,7 +15,10 @@ function HeartIcon({ albumID, userFavorites, setUserFavorites }) {
       className="size-8 justify-start"
       viewBox="0 -960 960 960"
       fill={isAlbumFavorite ? "red" : "white"}
-      onClick={toggleFavorite}
+      onClick={(event)=>{
+        toggleFavorite()
+        event.stopPropagation();
+      }}
     >
       <path
         d={
