@@ -1,16 +1,15 @@
+import { useContext } from "react"
 import countries from "../data/countrys"
 import {ToggleSwitch} from "./index"
+import { SearchContext } from "../context"
 
 function Header({
-  searchInput,
-  setSearchInput,
   countryInput,
   setCountryInput,
   nav,
   setNav,
-  favoritesToggle,
-  setFavoritesToggle
 }) {
+  const {searchInput,setSearchInput,setFavoritesToggle,favoritesToggle} = useContext(SearchContext)
   return (
     <header className="sticky top-0 shadow-xl z-10">
       <nav className="bg-gray-800  border-gray-200 px-4 lg:px-6 py-2.5">
@@ -51,7 +50,7 @@ function Header({
                 className={`bg-white flex justify-center w-52 h-12 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] items-center gap-1 ${nav ? "mt-1" : "ml-1"}`}
               >
                 Show Favorites
-                <ToggleSwitch favoritesToggle={favoritesToggle} setFavoritesToggle={setFavoritesToggle} />
+                <ToggleSwitch/>
                 
               </div>
             </div>

@@ -3,13 +3,16 @@ import { getTop100Albums } from "../../utils/api"
 import AlbumCardSkeleton from "./AlbumCardSkeleton"
 import CountryContext from "../context/county-context"
 import { ErrorAlert, AlbumCard, InfoAlert, AlbumPreview } from "./index"
+import { SearchContext } from "../context"
 
-function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
+function AlbumsList() {
+  const countryInput = useContext(CountryContext)
+  const {searchInput,favoritesToggle,setSearchInput} = useContext(SearchContext)
+
   const [albums, setAlbums] = useState(null)
   const [loading, isLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [searchResults, setSearchResults] = useState(null)
-  const countryInput = useContext(CountryContext)
   const [userFavorites, setUserFavorites] = useState(null)
   const [toggleAlbumPreview, setToggleAlbumPreview] = useState(false)
   const [albumPreview, setAlbumPreview] = useState(null)
@@ -129,7 +132,7 @@ function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
         </div>
       </div>
     ) : (
-      <InfoAlert setSearchInput={setSearchInput} />
+      <InfoAlert/>
     )
   }
 }

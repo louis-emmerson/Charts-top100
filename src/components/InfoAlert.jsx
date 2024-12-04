@@ -1,4 +1,8 @@
-function InfoAlert({ setSearchInput, infoMsg = "No Results Found" }) {
+import { useContext } from "react"
+import { SearchContext } from "../context"
+
+function InfoAlert({ infoMsg = "No Results Found" }) {
+  const { setSearchInput } = useContext(SearchContext)
   return (
     <div className="bg-gray-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex flex-col items-center mx-auto max-w-lg">
       <div className="flex items-center">
