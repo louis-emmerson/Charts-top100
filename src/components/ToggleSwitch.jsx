@@ -1,6 +1,8 @@
-function ToggleSwitch({favoritesToggle,
-  setFavoritesToggle}) {
-  
+import { useContext } from "react"
+import { SearchContext } from "../context"
+
+function ToggleSwitch() {
+  const {favoritesToggle,setFavoritesToggle } = useContext(SearchContext)
 
   function handleToggle() {
     setFavoritesToggle((currentToggle) => !currentToggle)
