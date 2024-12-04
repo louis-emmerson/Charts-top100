@@ -1,6 +1,6 @@
 import HeartIcon from "./HeartIcon"
 
-function AlbumCard({ album }) {
+function AlbumCard({ album, setUserFavorites, userFavorites }) {
   const {
     chartPosition,
     "im:image": image,
@@ -8,6 +8,7 @@ function AlbumCard({ album }) {
     "im:name": title,
     "im:releaseDate": releaseDate,
   } = album
+  
 
   return (
     <div
@@ -22,7 +23,7 @@ function AlbumCard({ album }) {
       <div className="bg-gradient-to-b from-black/10 to-black/75 p-4 h-full rounded-2xl flex flex-col justify-end">
         {" "}
         <div className="mb-16 md:mb-32">
-          <HeartIcon />
+          <HeartIcon  setUserFavorites={setUserFavorites} albumID={album.id.attributes["im:id"]} userFavorites={userFavorites} />
         </div>
         <h2 className="mt-3 text-3xl font-bold text-white truncate drop-shadow-xl">
           {chartPosition}
