@@ -7,6 +7,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("")
   const [countryInput, setCountryInput] = useState("us")
   const [nav, setNav] = useState(false)
+  const [favoritesToggle, setFavoritesToggle] = useState(false)
   return (
     <section>
       <CountryContext.Provider value={countryInput}>
@@ -17,11 +18,14 @@ function App() {
           setCountryInput={setCountryInput}
           setNav={setNav}
           nav={nav}
+          favoritesToggle={favoritesToggle}
+          setFavoritesToggle={setFavoritesToggle}
         />
         <Top100Albums
           searchInput={searchInput}
           setSearchInput={setSearchInput}
           nav={nav}
+          favoritesToggle={favoritesToggle}
         />
       </CountryContext.Provider>
     </section>
