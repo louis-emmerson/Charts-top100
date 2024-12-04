@@ -4,11 +4,12 @@ import AlbumCardSkeleton from "./AlbumCardSkeleton"
 import CountryContext from "../context/county-context"
 import { ErrorAlert, AlbumCard, InfoAlert, AlbumPreview } from "./index"
 import { SearchContext } from "../context"
+import { useParams } from "react-router-dom"
 
 function AlbumsList() {
-  const countryInput = useContext(CountryContext)
-  const {searchInput,favoritesToggle,setSearchInput} = useContext(SearchContext)
-
+  const {country} = useParams()
+  const {countryInput,setCountryInput} = useContext(CountryContext)
+  const {searchInput,favoritesToggle} = useContext(SearchContext)
   const [albums, setAlbums] = useState(null)
   const [loading, isLoading] = useState(true)
   const [isError, setIsError] = useState(false)
@@ -42,6 +43,7 @@ function AlbumsList() {
   }
 
   useEffect(() => {
+  if(country) setCountryInput(country)
     setIsError(false)
     isLoading(true)
     getTop100Albums(countryInput)
