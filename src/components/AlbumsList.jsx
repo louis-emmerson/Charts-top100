@@ -4,11 +4,11 @@ import AlbumCardSkeleton from "./AlbumCardSkeleton"
 import CountryContext from "../context/county-context"
 import { ErrorAlert, AlbumCard, InfoAlert, AlbumPreview } from "./index"
 import { SearchContext } from "../context"
-import { useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function AlbumsList() {
-  const {country} = useParams()
-  const {countryInput,setCountryInput} = useContext(CountryContext)
+  const navigation = useNavigate()
+  const {countryInput} = useContext(CountryContext)
   const {searchInput,favoritesToggle} = useContext(SearchContext)
   const [albums, setAlbums] = useState(null)
   const [loading, isLoading] = useState(true)
@@ -17,6 +17,7 @@ function AlbumsList() {
   const [userFavorites, setUserFavorites] = useState(null)
   const [toggleAlbumPreview, setToggleAlbumPreview] = useState(false)
   const [albumPreview, setAlbumPreview] = useState(null)
+
 
   const updateUserFavorites = () => {
     const storedFavorites = JSON.parse(localStorage.getItem("favoriteAlbumIDs"))
@@ -43,18 +44,18 @@ function AlbumsList() {
   }
 
   useEffect(() => {
-  if(country) setCountryInput(country)
     setIsError(false)
     isLoading(true)
+    navigation(`/country/${countryInput}`)
     getTop100Albums(countryInput)
-      .then((albums) => {
-        const modifiedAlbums = albums.map((album, index) => {
-          album.chartPosition = index + 1
-          return album
-        })
-        setAlbums(modifiedAlbums)
-        updateUserFavorites()
-        isLoading(false)
+    .then((albums) => {
+      const modifiedAlbums = albums.map((album, index) => {
+        album.chartPosition = index + 1
+        return album
+      })
+      setAlbums(modifiedAlbums)
+      updateUserFavorites()
+      isLoading(false)
       })
       .catch(() => {
         isLoading(false)
@@ -64,7 +65,6 @@ function AlbumsList() {
 
   useEffect(() => {
     if (!searchInput) setSearchResults(null)
-
     if (albums) {
       const filteredResults = albums.filter(
         (album) =>
