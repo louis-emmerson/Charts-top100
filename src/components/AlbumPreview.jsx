@@ -1,4 +1,7 @@
 function AlbumPreview({albumPreview ,setToggleAlbumPreview}) {
+const marketResults = albumPreview.link.attributes.href.match(/\.com\/([a-z]{2})\//)
+const albumMarket = marketResults[1]
+
   return (
     <div className="fixed z-30 inset-0 overflow-y-auto bg-black/60" onClick={()=>{setToggleAlbumPreview(false)}}>
       <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
@@ -11,7 +14,7 @@ function AlbumPreview({albumPreview ,setToggleAlbumPreview}) {
             height="450"
             width="100%"
             title="Media player"
-            src={`https://embed.music.apple.com/us/album/${albumPreview.id.attributes["im:id"]}?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1781270319&amp;theme=light`}
+            src={`https://embed.music.apple.com/${albumMarket}/album/${albumPreview.id.attributes["im:id"]}?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1781270319&amp;theme=light`}
             id="embedPlayer"
             sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
             allow="autoplay *; encrypted-media *; clipboard-write"
