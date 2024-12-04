@@ -2,8 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { getTop100Albums } from "../../utils/api"
 import AlbumCardSkeleton from "./AlbumCardSkeleton"
 import CountryContext from "../context/county-context"
-import {ErrorAlert, AlbumCard, InfoAlert, AlbumPreview} from "./index"
-
+import { ErrorAlert, AlbumCard, InfoAlert, AlbumPreview } from "./index"
 
 function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
   const [albums, setAlbums] = useState(null)
@@ -26,6 +25,19 @@ function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
     }
   }
 
+  const renderAlbumCard = (album) => {
+    return (
+      <AlbumCard
+        setUserFavorites={setUserFavorites}
+        album={album}
+        userFavorites={userFavorites}
+        key={`album-${album.id.attributes["im:id"]}`}
+        setToggleAlbumPreview={setToggleAlbumPreview}
+        setAlbumPreview={setAlbumPreview}
+      />
+    )
+  }
+
   useEffect(() => {
     setIsError(false)
     isLoading(true)
@@ -39,7 +51,8 @@ function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
         updateUserFavorites()
         isLoading(false)
       })
-      .catch((error) => {
+      .catch(() => {
+        isLoading(false)
         setIsError("Failed to fetch albums")
       })
   }, [countryInput])
@@ -57,12 +70,10 @@ function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
             .toLowerCase()
             .includes(searchInput.toLowerCase())
       )
-      
+
       setSearchResults(filteredResults)
     }
-  }, [favoritesToggle,searchInput])
-
- 
+  }, [favoritesToggle, searchInput])
 
   if (isError) {
     return <ErrorAlert errorMsg={isError} />
@@ -81,32 +92,19 @@ function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
     return (
       <div>
         {toggleAlbumPreview ? (
-          <AlbumPreview albumPreview={albumPreview} setToggleAlbumPreview={setToggleAlbumPreview} />
+          <AlbumPreview
+            albumPreview={albumPreview}
+            setToggleAlbumPreview={setToggleAlbumPreview}
+          />
         ) : null}
         <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
-          {favoritesToggle?albums.filter((album)=>userFavorites.includes(album.id.attributes["im:id"])).map((album) => {
-            return (
-              <AlbumCard
-                setUserFavorites={setUserFavorites}
-                album={album}
-                userFavorites={userFavorites}
-                key={`album-${album.id.attributes["im:id"]}`}
-                setToggleAlbumPreview={setToggleAlbumPreview}
-                setAlbumPreview={setAlbumPreview}
-              />
-            )
-          }):albums.map((album) => {
-            return (
-              <AlbumCard
-                setUserFavorites={setUserFavorites}
-                album={album}
-                userFavorites={userFavorites}
-                key={`album-${album.id.attributes["im:id"]}`}
-                setToggleAlbumPreview={setToggleAlbumPreview}
-                setAlbumPreview={setAlbumPreview}
-              />
-            )
-          })}
+          {favoritesToggle
+            ? albums
+                .filter((album) =>
+                  userFavorites.includes(album.id.attributes["im:id"])
+                )
+                .map((album) => renderAlbumCard(album))
+            : albums.map((album) => renderAlbumCard(album))}
         </div>
       </div>
     )
@@ -115,28 +113,19 @@ function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
     return searchResults && searchResults.length > 0 ? (
       <div>
         {toggleAlbumPreview ? (
-          <AlbumPreview albumPreview={albumPreview} setToggleAlbumPreview={setToggleAlbumPreview} />
+          <AlbumPreview
+            albumPreview={albumPreview}
+            setToggleAlbumPreview={setToggleAlbumPreview}
+          />
         ) : null}
         <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
-          {favoritesToggle?searchResults.filter((album)=>userFavorites.includes(album.id.attributes["im:id"])).map((album) => (
-            <AlbumCard
-              setUserFavorites={setUserFavorites}
-              album={album}
-              userFavorites={userFavorites}
-              key={`album-${album.id.attributes["im:id"]}`}
-              setToggleAlbumPreview={setToggleAlbumPreview}
-                setAlbumPreview={setAlbumPreview}
-            />
-          )):searchResults.map((album) => (
-            <AlbumCard
-              setUserFavorites={setUserFavorites}
-              album={album}
-              userFavorites={userFavorites}
-              key={`album-${album.id.attributes["im:id"]}`}
-              setToggleAlbumPreview={setToggleAlbumPreview}
-                setAlbumPreview={setAlbumPreview}
-            />
-          ))}
+          {favoritesToggle
+            ? searchResults
+                .filter((album) =>
+                  userFavorites.includes(album.id.attributes["im:id"])
+                )
+                .map((album) => renderAlbumCard(album))
+            : searchResults.map((album) => renderAlbumCard(album))}
         </div>
       </div>
     ) : (
