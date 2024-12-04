@@ -2,6 +2,7 @@ import { useContext } from "react"
 import countries from "../data/countrys"
 import {ToggleSwitch} from "./index"
 import { SearchContext } from "../context"
+import { useNavigate } from "react-router-dom"
 
 function Header({
   countryInput,
@@ -9,6 +10,7 @@ function Header({
   nav,
   setNav,
 }) {
+  const navigation = useNavigate()
   const {searchInput,setSearchInput,setFavoritesToggle,favoritesToggle} = useContext(SearchContext)
   return (
     <header className="sticky top-0 shadow-xl z-10">
@@ -63,6 +65,7 @@ function Header({
                   value={countryInput}
                   onChange={(event) => {
                     setCountryInput(event.target.value)
+                    navigation(`/country/${event.target.value}`)
                   }}
                 >
                   {countries.map((country) => {
