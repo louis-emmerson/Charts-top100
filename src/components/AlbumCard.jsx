@@ -20,7 +20,7 @@ function AlbumCard({ album, setUserFavorites, userFavorites }) {
         backgroundSize: "cover",
       }}
     >
-      <div className="bg-gradient-to-b from-black/10 to-black/75 p-4 h-full rounded-2xl flex flex-col justify-end">
+      <div className="bg-gradient-to-b from-black/5 to-black/70 p-4 h-full rounded-2xl flex flex-col justify-end">
         {" "}
         <div className="mb-16 md:mb-32">
           <HeartIcon  setUserFavorites={setUserFavorites} albumID={album.id.attributes["im:id"]} userFavorites={userFavorites} />
