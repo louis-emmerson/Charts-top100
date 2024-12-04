@@ -6,8 +6,10 @@ function Header({
   setSearchInput,
   countryInput,
   setCountryInput,
+  nav,
+  setNav
 }) {
-  const [nav, setNav] = useState(false)
+  
 
   return (
     <header className="sticky top-0 shadow-xl z-10">
