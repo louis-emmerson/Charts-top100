@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { SearchContext } from "../context"
 
 function InfoAlert({ infoMsg = "No Results Found" }) {
-  const { setSearchInput } = useContext(SearchContext)
+  const { setSearchInput,setFavoritesToggle } = useContext(SearchContext)
   return (
     <div className="bg-gray-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex flex-col items-center mx-auto max-w-lg">
       <div className="flex items-center">
@@ -22,6 +22,7 @@ function InfoAlert({ infoMsg = "No Results Found" }) {
           type="button"
           onClick={() => {
             setSearchInput("")
+            setFavoritesToggle(false)
           }}
           className="bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm rounded-full px-5 py-2.5 w-40"
         >
