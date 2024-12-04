@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom"
 
 function AlbumsList() {
   const navigation = useNavigate()
-  const {countryInput} = useContext(CountryContext)
-  const {searchInput,favoritesToggle} = useContext(SearchContext)
+  const { countryInput } = useContext(CountryContext)
+  const { searchInput, favoritesToggle } = useContext(SearchContext)
   const [albums, setAlbums] = useState(null)
   const [loading, isLoading] = useState(true)
   const [isError, setIsError] = useState(false)
@@ -17,7 +17,6 @@ function AlbumsList() {
   const [userFavorites, setUserFavorites] = useState(null)
   const [toggleAlbumPreview, setToggleAlbumPreview] = useState(false)
   const [albumPreview, setAlbumPreview] = useState(null)
-
 
   const updateUserFavorites = () => {
     const storedFavorites = JSON.parse(localStorage.getItem("favoriteAlbumIDs"))
@@ -30,17 +29,23 @@ function AlbumsList() {
     }
   }
 
-  const renderAlbumCard = (album) => {
-    return (
-      <AlbumCard
-        setUserFavorites={setUserFavorites}
-        album={album}
-        userFavorites={userFavorites}
-        key={`album-${album.id.attributes["im:id"]}`}
-        setToggleAlbumPreview={setToggleAlbumPreview}
-        setAlbumPreview={setAlbumPreview}
-      />
-    )
+  const renderAlbumCards = (albums) => {
+    if (albums.length === 0) {
+      if (favoritesToggle) return <InfoAlert infoMsg="You have no favorites!" />
+      return <InfoAlert />
+    }
+    return albums.map((album) => {
+      return (
+        <AlbumCard
+          setUserFavorites={setUserFavorites}
+          album={album}
+          userFavorites={userFavorites}
+          key={`album-${album.id.attributes["im:id"]}`}
+          setToggleAlbumPreview={setToggleAlbumPreview}
+          setAlbumPreview={setAlbumPreview}
+        />
+      )
+    })
   }
 
   useEffect(() => {
@@ -48,14 +53,14 @@ function AlbumsList() {
     isLoading(true)
     navigation(`/country/${countryInput}`)
     getTop100Albums(countryInput)
-    .then((albums) => {
-      const modifiedAlbums = albums.map((album, index) => {
-        album.chartPosition = index + 1
-        return album
-      })
-      setAlbums(modifiedAlbums)
-      updateUserFavorites()
-      isLoading(false)
+      .then((albums) => {
+        const modifiedAlbums = albums.map((album, index) => {
+          album.chartPosition = index + 1
+          return album
+        })
+        setAlbums(modifiedAlbums)
+        updateUserFavorites()
+        isLoading(false)
       })
       .catch(() => {
         isLoading(false)
@@ -104,12 +109,12 @@ function AlbumsList() {
         ) : null}
         <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
           {favoritesToggle
-            ? albums
-                .filter((album) =>
+            ? renderAlbumCards(
+                albums.filter((album) =>
                   userFavorites.includes(album.id.attributes["im:id"])
                 )
-                .map((album) => renderAlbumCard(album))
-            : albums.map((album) => renderAlbumCard(album))}
+              )
+            : renderAlbumCards(albums)}
         </div>
       </div>
     )
@@ -125,16 +130,16 @@ function AlbumsList() {
         ) : null}
         <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
           {favoritesToggle
-            ? searchResults
-                .filter((album) =>
+            ? renderAlbumCards(
+                searchResults.filter((album) =>
                   userFavorites.includes(album.id.attributes["im:id"])
                 )
-                .map((album) => renderAlbumCard(album))
-            : searchResults.map((album) => renderAlbumCard(album))}
+              )
+            : renderAlbumCards(searchResults)}
         </div>
       </div>
     ) : (
-      <InfoAlert/>
+      <InfoAlert infoMsg={`No results found matching: ${searchInput}!`} />
     )
   }
 }
