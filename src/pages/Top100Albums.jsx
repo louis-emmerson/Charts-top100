@@ -1,4 +1,4 @@
-import AlbumsList from "../components/AlbumsList"
+import { AlbumsList } from "../components"
 
 function Top100Albums({searchInput,setSearchInput,nav,favoritesToggle}){
     return( 

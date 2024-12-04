@@ -1,11 +1,9 @@
 import { useContext, useEffect, useState } from "react"
-import AlbumCard from "./AlbumCard"
 import { getTop100Albums } from "../../utils/api"
-import ErrorAlert from "./ErrorAlert"
 import AlbumCardSkeleton from "./AlbumCardSkeleton"
-import InfoAlert from "./InfoAlert"
 import CountryContext from "../context/county-context"
-import AlbumPreview from "./AlbumPreview"
+import {ErrorAlert, AlbumCard, InfoAlert, AlbumPreview} from "./index"
+
 
 function AlbumsList({ searchInput, setSearchInput, favoritesToggle }) {
   const [albums, setAlbums] = useState(null)

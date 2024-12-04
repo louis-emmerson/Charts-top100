@@ -1,6 +1,5 @@
-import { useState } from "react"
 import countries from "../data/countrys"
-import ToggleSwitch from "./ToggleSwitch"
+import {ToggleSwitch} from "./index"
 
 function Header({
   searchInput,
