@@ -6,12 +6,24 @@ import AlbumCardSkeleton from "./AlbumCardSkeleton"
 import InfoAlert from "./InfoAlert"
 import CountryContext from "../context/county-context"
 
-function AlbumsList({ searchInput,setSearchInput }) {
+function AlbumsList({ searchInput, setSearchInput }) {
   const [albums, setAlbums] = useState(null)
   const [loading, isLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [searchResults, setSearchResults] = useState(null)
   const countryInput = useContext(CountryContext)
+  const [userFavorites, setUserFavorites] = useState(null)
+
+  const updateUserFavorites = () => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favoriteAlbumIDs"))
+    if (storedFavorites) {
+      setUserFavorites(storedFavorites)
+    } else {
+      const emptyFavorites = []
+      setUserFavorites(emptyFavorites)
+      localStorage.setItem("favoriteAlbumIDs", JSON.stringify(emptyFavorites))
+    }
+  }
 
   useEffect(() => {
     setIsError(false)
@@ -23,6 +35,7 @@ function AlbumsList({ searchInput,setSearchInput }) {
           return album
         })
         setAlbums(modifiedAlbums)
+        updateUserFavorites()
         isLoading(false)
       })
       .catch((error) => {
@@ -65,31 +78,32 @@ function AlbumsList({ searchInput,setSearchInput }) {
         {albums.map((album) => {
           return (
             <AlbumCard
+              setUserFavorites={setUserFavorites}
               album={album}
+              userFavorites={userFavorites}
               key={`album-${album.id.attributes["im:id"]}`}
             />
           )
         })}
       </div>
     )
-
-    if (searchInput) {
-      return searchResults && searchResults.length > 0 ? (
-        <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
-          {searchResults.map((album) => (
-            <AlbumCard
-              album={album}
-              key={`album-${album.id.attributes["im:id"]}`}
-            />
-          ))}
-        </div>
-      ) : (
-        <InfoAlert setSearchInput={setSearchInput} />
-      );
-    }
-    
-    
- 
+  
+  if (searchInput) {
+    return searchResults && searchResults.length > 0 ? (
+      <div className="flex flex-wrap gap-4 justify-center p-4 max-w-screen-xl">
+        {searchResults.map((album) => (
+          <AlbumCard
+            setUserFavorites={setUserFavorites}
+            album={album}
+            userFavorites={userFavorites}
+            key={`album-${album.id.attributes["im:id"]}`}
+          />
+        ))}
+      </div>
+    ) : (
+      <InfoAlert setSearchInput={setSearchInput} />
+    )
+  }
 }
 
 export default AlbumsList
