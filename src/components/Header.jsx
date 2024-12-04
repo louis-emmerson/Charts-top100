@@ -65,7 +65,6 @@ function Header({
                   value={countryInput}
                   onChange={(event) => {
                     setCountryInput(event.target.value)
-                    navigation(`/country/${event.target.value}`)
                   }}
                 >
                   {countries.map((country) => {
