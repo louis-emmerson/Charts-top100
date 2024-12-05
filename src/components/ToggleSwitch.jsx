@@ -12,7 +12,7 @@ function ToggleSwitch() {
     <div className="mt-1">
       <label className="relative inline-flex cursor-pointer items-center">
         <input
-          id="switch-2"
+          id="fav"
           type="checkbox"
           className="peer sr-only"
           checked={favoritesToggle}
