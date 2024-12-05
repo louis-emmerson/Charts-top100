@@ -48,7 +48,7 @@ function Header({ countryInput, setCountryInput, nav, setNav }) {
               <div
                 className={`bg-white flex justify-center w-52 h-12 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] items-center gap-1 ${nav ? "mt-1" : "ml-1"}`}
               >
-                <label for={"fav-switch"} className="text-sm">
+                <label aria-label="fav-switch" className="text-sm">
                   Show Favorites
                 </label>
                 <ToggleSwitch />
