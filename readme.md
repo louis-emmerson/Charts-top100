@@ -19,11 +19,13 @@ This website allows users to explore the top 100 albums on iTunes for a selected
 4. **Search by Title or Artist**: Use the search bar to find albums based on their title or the artist's name.
 
 **Album Track Preview:**
+
 ![track-preview](images/track-preview.png)
 
-
 **Home Preview:**
+
 ![home-preview](images/home.png)
 
 **Lighthouse Scores:**
+
 ![lighthouse-scores](images/lighthouse.png)
