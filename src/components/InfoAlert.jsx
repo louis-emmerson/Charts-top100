@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import React, { useContext } from 'react';
 import { SearchContext } from "../context"
 
 function InfoAlert({ infoMsg = "No Results Found" }) {
@@ -20,6 +20,7 @@ function InfoAlert({ infoMsg = "No Results Found" }) {
       <div className="mt-4">
         <button
           type="button"
+          aria-label='Show all albums'
           onClick={() => {
             setSearchInput("")
             setFavoritesToggle(false)
