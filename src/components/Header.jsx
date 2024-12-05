@@ -1,25 +1,21 @@
 import { useContext } from "react"
 import countries from "../data/countrys"
-import {ToggleSwitch} from "./index"
+import { ToggleSwitch } from "./index"
 import { SearchContext } from "../context"
 import { useNavigate } from "react-router-dom"
 
-function Header({
-  countryInput,
-  setCountryInput,
-  nav,
-  setNav,
-}) {
+function Header({ countryInput, setCountryInput, nav, setNav }) {
   const navigation = useNavigate()
-  const {searchInput,setSearchInput,setFavoritesToggle,favoritesToggle} = useContext(SearchContext)
+  const { searchInput, setSearchInput, setFavoritesToggle, favoritesToggle } =
+    useContext(SearchContext)
   return (
     <header className="sticky top-0 shadow-xl z-10">
       <nav className="bg-gray-800  border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg">
           <a href="#" className="flex items-center">
-            <span className="self-center text-xl font-semibold text-white whitespace-nowrap">
+            <h1 className="self-center text-xl font-semibold text-white whitespace-nowrap">
               Top 100 Albums
-            </span>
+            </h1>
           </a>
           <div
             className={`flex-col gap-1 md:flex md:flex-row items-center w-full md:w-auto md:order-2 transition-all duration-300 ${
@@ -30,6 +26,7 @@ function Header({
           >
             <div className="bg-white flex px-1 py-1 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif]">
               <input
+                aria-label="search albums"
                 placeholder="Search Albums..."
                 className="w-full outline-none bg-white pl-4 text-sm"
                 value={searchInput}
@@ -51,9 +48,10 @@ function Header({
               <div
                 className={`bg-white flex justify-center w-52 h-12 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] items-center gap-1 ${nav ? "mt-1" : "ml-1"}`}
               >
-                <label for={"fav-switch"} className="text-sm">Show Favorites</label>
-                <ToggleSwitch/>
-                
+                <label for={"fav-switch"} className="text-sm">
+                  Show Favorites
+                </label>
+                <ToggleSwitch />
               </div>
             </div>
             <div className={`flex items-center gap-2`}>
@@ -61,6 +59,7 @@ function Header({
                 className={`bg-white flex px-1 py-1 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] ${nav ? "max-w-md mt-1" : "ml-1 w-44"}`}
               >
                 <select
+                  aria-label="select country"
                   className=" outline-none bg-white pl-4 text-sm px-5 py-2.5 w-full "
                   value={countryInput}
                   onChange={(event) => {

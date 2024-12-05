@@ -47,7 +47,7 @@ function AlbumCard({ album, setUserFavorites, userFavorites,setToggleAlbumPrevie
               userFavorites={userFavorites}
             />
           </div>
-          <h2 className="mt-3 text-3xl font-bold text-white truncate drop-shadow-xl">
+          <h2  className="mt-3 text-3xl font-bold text-white truncate drop-shadow-xl">
             {chartPosition}
           </h2>
           <div>
