@@ -29,7 +29,7 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
           <h2 className="text-sm">{album["im:artist"].label}</h2>
         </div>
         {!albumTracks ? (
-          <ErrorAlert errorMsg="No Previews available" />
+          <ErrorAlert errorMsg="No track previews available" />
         ) : (
           <div>
             <div className="mb-4">
