@@ -12,7 +12,7 @@ function Header({ countryInput, setCountryInput, nav, setNav }) {
     <header className="sticky top-0 shadow-xl z-10">
       <nav className="bg-gray-800  border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg">
-          <a href="#" className="flex items-center">
+          <a onClick={()=>{setCountryInput('us')}}className="flex items-center">
             <h1 className="self-center text-xl font-semibold text-white whitespace-nowrap">
               Top 100 Albums
             </h1>
