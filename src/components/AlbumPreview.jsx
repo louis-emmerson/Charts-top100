@@ -1,29 +1,66 @@
-function AlbumPreview({albumPreview ,setToggleAlbumPreview}) {
-const marketResults = albumPreview.link.attributes.href.match(/\.com\/([a-z]{2})\//)
-const albumMarket = marketResults[1]
+import { useState } from "react"
+import AudioPlayer from "./AudioPlayer.JSX"
+import ErrorAlert from "./ErrorAlert"
 
-  return (
-    <div className="fixed z-30 inset-0 overflow-y-auto bg-black/60" onClick={()=>{setToggleAlbumPreview(false)}}>
-      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 transition-opacity">
-          <div className="absolute inset-0"></div>
-        </div>
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-        <div className="w-full inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-          <iframe
-            height="450"
-            width="100%"
-            title="Media player"
-            src={`https://embed.music.apple.com/${albumMarket}/album/${albumPreview.id.attributes["im:id"]}?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1781270319&amp;theme=light`}
-            id="embedPlayer"
-            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-            allow="autoplay *; encrypted-media *; clipboard-write"
-            style={{ border: '0px', borderRadius: '12px', width: '100%', height: '450px', maxWidth: '660px' }}
-          ></iframe>
+function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
+  const album = albumPreview[0]
+  const albumTracks = albumPreview[1]
+  const [currentTrack, setCurrentTrack] = useState(null)
+
+  
+    return (
+      <div
+        className="fixed inset-0 z-30 flex items-center justify-center bg-black/60"
+        onClick={() => setToggleAlbumPreview(false)}
+      >
+        <div
+          className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <div className="mb-4 flex justify-center">
+            <img src={album["im:image"][0].label.replace("55x55", "250x250")} />
+          </div>
+          <div className="flex justify-center">
+            <h1 className="text-xl">{album["im:name"].label}</h1>
+          </div>
+          <div className="flex justify-center">
+            <h2 className="text-sm">{album["im:artist"].label}</h2>
+          </div>
+          {!albumTracks ? <ErrorAlert errorMsg="No Previews available"/> : (
+            <div>
+              <div className="mb-4">
+                <AudioPlayer currentTrack={currentTrack} />
+              </div>
+
+              <div className="space-y-2 max-h-36 overflow-y-auto">
+                {albumTracks.map((track, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between items-center bg-gray-50 p-2 rounded shadow"
+                  >
+                    <span className="text-sm pr-3">{track.trackNumber}</span>
+                    <span className="text-sm truncate">{track.trackName}</span>
+                    <button
+                      className="bg-blue-500 text-white text-sm px-3 py-1 rounded "
+                      onClick={(event) => {
+                        event.stopPropagation()
+                        setCurrentTrack(track.previewUrl)
+                      }}
+                    >
+                      Play
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-center text-center pt-2">
+            <h2 className="text-xs">{album.rights.label}</h2>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    )
 }
 
-export default AlbumPreview;
+export default AlbumPreview

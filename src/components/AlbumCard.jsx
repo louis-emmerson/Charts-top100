@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react"
 import HeartIcon from "./HeartIcon"
+import { getAlbumTracks } from "../../utils/api"
 
 function AlbumCard({ album, setUserFavorites, userFavorites,setToggleAlbumPreview,setAlbumPreview }) {
   const {
@@ -8,6 +10,18 @@ function AlbumCard({ album, setUserFavorites, userFavorites,setToggleAlbumPrevie
     "im:name": title,
     "im:releaseDate": releaseDate,
   } = album
+  const [albumTracks, setAlbumTracks] = useState([])
+  const marketResults = album.link.attributes.href.match(/\.com\/([a-z]{2})\//)
+  const albumMarket = marketResults[1]
+
+  useEffect(()=>{
+    getAlbumTracks(album.id.attributes["im:id"],albumMarket).then((tracks)=>{
+      setAlbumTracks(tracks)
+    }
+    ).catch((err)=>{
+      setAlbumTracks(null)
+    })
+  },[album.id])
 
   return (
       
@@ -22,7 +36,7 @@ function AlbumCard({ album, setUserFavorites, userFavorites,setToggleAlbumPrevie
       >
         
         <div className="bg-gradient-to-b from-black/5 to-black/70 p-4 h-full rounded-2xl flex flex-col justify-end" onClick={()=>{
-          setAlbumPreview(album)
+          setAlbumPreview([album,albumTracks])
           setToggleAlbumPreview(true)
         }}>
           {" "}
