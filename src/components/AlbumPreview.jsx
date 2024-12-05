@@ -36,7 +36,7 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
               <AudioPlayer currentTrack={currentTrack} />
             </div>
 
-            <div className="space-y-2 max-h-36 overflow-y-auto">
+            <div className="space-y-2 max-h-36 overflow-y-auto overflow-x-hidden">
               <ul className="track-list">
                 {albumTracks.map((track) => (
                   <li
@@ -47,7 +47,7 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
                       <span className="track-number text-sm pr-3">
                         {track.trackNumber}
                       </span>
-                      <span className="track-name text-sm truncate">
+                      <span className="track-name text-sm ">
                         {track.trackName}
                       </span>
                     </div>

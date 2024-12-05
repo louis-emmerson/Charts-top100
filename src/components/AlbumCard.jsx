@@ -39,7 +39,6 @@ function AlbumCard({ album, setUserFavorites, userFavorites,setToggleAlbumPrevie
           setAlbumPreview([album,albumTracks])
           setToggleAlbumPreview(true)
         }}>
-          {" "}
           <div className="mb-16 md:mb-32">
             <HeartIcon
               setUserFavorites={setUserFavorites}
