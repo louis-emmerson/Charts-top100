@@ -9,6 +9,13 @@ function getTop100Albums(country = "us"){
     })
 }
 
+function getAlbumTracks(albumId,market){
+    return api.get(`/${market}/lookup?id=${albumId}&entity=song`).then(({data})=>{
+        if(albumId ===1440985994) console.log(data)
+        return data.results
+      })
+}
 
 
-export {getTop100Albums}
+
+export {getTop100Albums,getAlbumTracks}
