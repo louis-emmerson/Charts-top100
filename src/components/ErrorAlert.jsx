@@ -1,3 +1,4 @@
+import React from "react"
 function ErrorAlert({errorMsg = "There has been an error"}) {
   return (
     <div className="bg-red-500 px-6 py-4  my-4 rounded-md text-lg flex items-center mx-auto max-w-lg">
