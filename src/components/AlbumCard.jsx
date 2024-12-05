@@ -15,7 +15,7 @@ function AlbumCard({ album, setUserFavorites, userFavorites,setToggleAlbumPrevie
         className="w-full h-56 md:size-72  rounded-2xl z-0"
         style={{
           backgroundImage:
-            image.length > 0 ? `url(${image[image.length - 1].label})` : "none",
+            image.length > 0 ? `url(${image[0].label.replace("55x55","300x300")})` : "none",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
