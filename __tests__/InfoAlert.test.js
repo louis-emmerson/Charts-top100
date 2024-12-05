@@ -15,13 +15,11 @@ test("loads and displays default greeting and button", () => {
     </SearchContext.Provider>
   )
 
-  return screen.findByRole("button").then((button) => {
-    expect(button).toHaveTextContent("Show all albums")
+  const button = screen.getByRole("button")
+  expect(button).toHaveTextContent("Show all albums")
 
-    return screen.findByText("No Results Found").then((text) => {
-      expect(text).toBeInTheDocument()
-    })
-  })
+  const message = screen.getByText("No Results Found")
+  expect(message).toBeInTheDocument()
 })
 
 test("loads and displays custom greeting", () => {
@@ -31,9 +29,8 @@ test("loads and displays custom greeting", () => {
     </SearchContext.Provider>
   )
 
-  return screen.findByText("This is the custom message").then((text) => {
-    expect(text).toBeInTheDocument()
-  })
+  const customMessage = screen.getByText("This is the custom message")
+  expect(customMessage).toBeInTheDocument()
 })
 
 test("button has appropriate aria attributes", () => {
@@ -43,7 +40,7 @@ test("button has appropriate aria attributes", () => {
     </SearchContext.Provider>
   )
 
-  return screen.findByRole("button").then((button) => {
-    expect(button).toHaveAttribute("aria-label", "Show all albums")
-  })
+  const button = screen.getByRole("button")
+
+  expect(button).toHaveAttribute("aria-label", "Show all albums")
 })
