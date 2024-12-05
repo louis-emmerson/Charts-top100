@@ -17,7 +17,10 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-4 flex justify-center">
-          <img src={album["im:image"][0].label.replace("55x55", "250x250")} alt={`${album["im:name"].label} Album Artwork`} />
+          <img
+            src={album["im:image"][0].label.replace("55x55", "250x250")}
+            alt={`${album["im:name"].label} Album Artwork`}
+          />
         </div>
         <div className="flex justify-center">
           <h1 className="text-xl">{album["im:name"].label}</h1>
@@ -65,7 +68,7 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
         )}
 
         <div className="flex justify-center text-center pt-2">
-          <h2 className="text-xs">{album.rights.label}</h2>
+          <p className="text-xs">{album.rights.label}</p>
         </div>
       </div>
     </div>
