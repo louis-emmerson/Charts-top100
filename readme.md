@@ -18,6 +18,28 @@ This website allows users to explore the top 100 albums on iTunes for a selected
    - Use the filter option to view only your favorite albums.
 4. **Search by Title or Artist**: Use the search bar to find albums based on their title or the artist's name.
 
+## Getting Started
+
+### Prerequisites
+
+- Node.js 
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repo-url>
+2. **Navigate to the project directory:**
+    ```bash
+    cd Charts-top100
+3. **Install packages:**
+    ```bash
+    npm install
+
+5. **Run the app locally using:**
+     ```bash
+    npm run dev
+
 **Album Track Preview:**
 
 ![track-preview](images/track-preview.png)
