@@ -1,52 +1,57 @@
-import { useContext } from "react"
-import countries from "../data/countrys"
-import { ToggleSwitch } from "./index"
-import { SearchContext } from "../context"
-import { useNavigate } from "react-router-dom"
+import { useContext } from "react";
+import countries from "../data/countrys";
+import { ToggleSwitch } from "./index";
+import { SearchContext } from "../context";
+import { useNavigate } from "react-router-dom";
 
 function Header({ countryInput, setCountryInput, nav, setNav }) {
-  const navigation = useNavigate()
+  const navigation = useNavigate();
   const { searchInput, setSearchInput, setFavoritesToggle, favoritesToggle } =
-    useContext(SearchContext)
+    useContext(SearchContext);
   return (
-    <header className="sticky top-0 shadow-xl z-10">
-      <nav className="bg-gray-800  border-gray-200 px-4 lg:px-6 py-2.5">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg">
-          <a onClick={()=>{setCountryInput('us')}}className="flex items-center">
-            <h1 className="self-center text-xl font-semibold text-white whitespace-nowrap">
+    <header className="sticky top-0 z-10 shadow-xl">
+      <nav className="border-gray-200 bg-gray-800 px-4 py-2.5 lg:px-6">
+        <div className="mx-auto flex max-w-screen-lg flex-wrap items-center justify-between">
+          <a
+            onClick={() => {
+              setCountryInput("us");
+            }}
+            className="flex items-center"
+          >
+            <h1 className="self-center whitespace-nowrap text-xl font-semibold text-white">
               Top 100 Albums
             </h1>
           </a>
           <div
-            className={`flex-col gap-1 md:flex md:flex-row items-center w-full md:w-auto md:order-2 transition-all duration-300 ${
+            className={`w-full flex-col items-center gap-1 transition-all duration-300 md:order-2 md:flex md:w-auto md:flex-row ${
               nav
-                ? "absolute top-16 left-0  bg-gray-700 shadow-md p-4 md:relative md:top-0 md:w-auto md:bg-transparent md:shadow-none"
-                : "hidden md:flex gap-1"
+                ? "absolute left-0 top-16 bg-gray-700 p-4 shadow-md md:relative md:top-0 md:w-auto md:bg-transparent md:shadow-none"
+                : "hidden gap-1 md:flex"
             }`}
           >
-            <div className="bg-white flex px-1 py-1 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif]">
+            <div className="mx-auto flex max-w-md overflow-hidden rounded-full border bg-white px-1 py-1 font-[sans-serif]">
               <input
                 aria-label="search albums"
                 placeholder="Search Albums..."
-                className="w-full outline-none bg-white pl-4 text-sm"
+                className="w-full bg-white pl-4 text-sm outline-none"
                 value={searchInput}
                 onChange={(event) => {
-                  setSearchInput(event.target.value)
+                  setSearchInput(event.target.value);
                 }}
               />
               <button
                 type="button"
                 onClick={() => {
-                  setSearchInput("")
+                  setSearchInput("");
                 }}
-                className="bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm rounded-full px-5 py-2.5 w-40"
+                className="w-40 rounded-full bg-blue-600 px-5 py-2.5 text-sm text-white transition-all hover:bg-blue-700"
               >
                 {searchInput ? "Clear" : "Search"}
               </button>
             </div>
             <div className={`flex items-center gap-2`}>
               <div
-                className={`bg-white flex justify-center w-52 h-12 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] items-center gap-1 ${nav ? "mt-1" : "ml-1"}`}
+                className={`mx-auto flex h-12 w-52 max-w-md items-center justify-center gap-1 overflow-hidden rounded-full border bg-white font-[sans-serif] ${nav ? "mt-1" : "ml-1"}`}
               >
                 <label aria-label="fav-switch" className="text-sm">
                   Show Favorites
@@ -56,14 +61,14 @@ function Header({ countryInput, setCountryInput, nav, setNav }) {
             </div>
             <div className={`flex items-center gap-2`}>
               <div
-                className={`bg-white flex px-1 py-1 rounded-full border  overflow-hidden max-w-md mx-auto font-[sans-serif] ${nav ? "max-w-md mt-1" : "ml-1 w-44"}`}
+                className={`mx-auto flex max-w-md overflow-hidden rounded-full border bg-white px-1 py-1 font-[sans-serif] ${nav ? "mt-1 max-w-md" : "ml-1 w-44"}`}
               >
                 <select
                   aria-label="select country"
-                  className=" outline-none bg-white pl-4 text-sm px-5 py-2.5 w-full "
+                  className="w-full bg-white px-5 py-2.5 pl-4 text-sm outline-none"
                   value={countryInput}
                   onChange={(event) => {
-                    setCountryInput(event.target.value)
+                    setCountryInput(event.target.value);
                   }}
                 >
                   {countries.map((country) => {
@@ -71,14 +76,14 @@ function Header({ countryInput, setCountryInput, nav, setNav }) {
                       <option key={country[0]} value={country[0]}>
                         {country[1]}
                       </option>
-                    )
+                    );
                   })}
                 </select>
               </div>
             </div>
           </div>
 
-          <div className="md:hidden flex items-center lg:order-1">
+          <div className="flex items-center md:hidden lg:order-1">
             <button
               type="button"
               className="inline-flex items-center p-2"
@@ -89,7 +94,7 @@ function Header({ countryInput, setCountryInput, nav, setNav }) {
               <span className="sr-only">Open main menu</span>
               {
                 <svg
-                  className="size-8 stroke-2 fill-none stroke-white"
+                  className="size-8 fill-none stroke-white stroke-2"
                   viewBox="0 0 24 24"
                 >
                   <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" />
@@ -100,7 +105,7 @@ function Header({ countryInput, setCountryInput, nav, setNav }) {
         </div>
       </nav>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

@@ -1,13 +1,13 @@
 function HeartIcon({ albumID, userFavorites, setUserFavorites }) {
-  const isAlbumFavorite = userFavorites.includes(albumID)
+  const isAlbumFavorite = userFavorites.includes(albumID);
 
   function toggleFavorite() {
     const updatedFavorites = isAlbumFavorite
       ? userFavorites.filter((id) => id !== albumID)
-      : [...userFavorites, albumID]
+      : [...userFavorites, albumID];
 
-    setUserFavorites(updatedFavorites)
-    localStorage.setItem("favoriteAlbumIDs", JSON.stringify(updatedFavorites))
+    setUserFavorites(updatedFavorites);
+    localStorage.setItem("favoriteAlbumIDs", JSON.stringify(updatedFavorites));
   }
 
   return (
@@ -15,8 +15,8 @@ function HeartIcon({ albumID, userFavorites, setUserFavorites }) {
       className="size-8 justify-start"
       viewBox="0 -960 960 960"
       fill={isAlbumFavorite ? "red" : "white"}
-      onClick={(event)=>{
-        toggleFavorite()
+      onClick={(event) => {
+        toggleFavorite();
         event.stopPropagation();
       }}
     >
@@ -28,7 +28,7 @@ function HeartIcon({ albumID, userFavorites, setUserFavorites }) {
         }
       />
     </svg>
-  )
+  );
 }
 
-export default HeartIcon
+export default HeartIcon;

@@ -1,11 +1,11 @@
-import { useState } from "react"
-import AudioPlayer from "./AudioPlayer.JSX"
-import ErrorAlert from "./ErrorAlert"
+import { useState } from "react";
+import AudioPlayer from "./AudioPlayer.JSX";
+import ErrorAlert from "./ErrorAlert";
 
 function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
-  const album = albumPreview[0]
-  const albumTracks = albumPreview[1]
-  const [currentTrack, setCurrentTrack] = useState(null)
+  const album = albumPreview[0];
+  const albumTracks = albumPreview[1];
+  const [currentTrack, setCurrentTrack] = useState(null);
 
   return (
     <div
@@ -13,7 +13,7 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
       onClick={() => setToggleAlbumPreview(false)}
     >
       <div
-        className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative"
+        className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-4 flex justify-center">
@@ -36,7 +36,7 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
               <AudioPlayer currentTrack={currentTrack} />
             </div>
 
-            <div className="space-y-2 max-h-36 overflow-y-auto overflow-x-hidden">
+            <div className="max-h-36 space-y-2 overflow-y-auto overflow-x-hidden">
               <ul className="track-list">
                 {albumTracks.map((track) => (
                   <li
@@ -44,18 +44,18 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
                     className="track-item flex items-center justify-between"
                   >
                     <div className="flex items-center">
-                      <span className="track-number text-sm pr-3">
+                      <span className="track-number pr-3 text-sm">
                         {track.trackNumber}
                       </span>
-                      <span className="track-name text-sm ">
+                      <span className="track-name text-sm">
                         {track.trackName}
                       </span>
                     </div>
                     <button
-                      className="bg-blue-500 text-white text-base pr-4 pl-4 pt-1 pb-1 mb-1 rounded "
+                      className="mb-1 rounded bg-blue-500 pb-1 pl-4 pr-4 pt-1 text-base text-white"
                       onClick={(event) => {
-                        event.stopPropagation()
-                        setCurrentTrack(track.previewUrl)
+                        event.stopPropagation();
+                        setCurrentTrack(track.previewUrl);
                       }}
                     >
                       Play
@@ -67,12 +67,12 @@ function AlbumPreview({ albumPreview, setToggleAlbumPreview }) {
           </div>
         )}
 
-        <div className="flex justify-center text-center pt-2">
+        <div className="flex justify-center pt-2 text-center">
           <p className="text-xs">{album.rights.label}</p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default AlbumPreview
+export default AlbumPreview;
