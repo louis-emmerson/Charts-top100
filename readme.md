@@ -7,7 +7,8 @@ This website allows users to explore the top 100 albums on iTunes for a selected
 - **Album Browsing**: View the top 100 albums for the selected country.
 - **Track Previews**: Click on an album to listen to previews of its tracks.
 - **Favorites**: Mark albums as favorites and filter the list to view only your favorites.
-- **Search**: Search albums by title or artist for the selected country's Top 100.
+- **Search**: Search albums by title or artist.
+- **Choose a Country**: Pick a country to explore its top 100 albums chart.
 
 ## How-to 
 
