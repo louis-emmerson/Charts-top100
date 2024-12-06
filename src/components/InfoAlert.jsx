@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
-import { SearchContext } from "../context"
+import React, { useContext } from "react";
+import { SearchContext } from "../context";
 
 function InfoAlert({ infoMsg = "No Results Found" }) {
-  const { setSearchInput,setFavoritesToggle } = useContext(SearchContext)
+  const { setSearchInput, setFavoritesToggle } = useContext(SearchContext);
   return (
-    <div className="bg-gray-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex flex-col items-center mx-auto max-w-lg">
+    <div className="mx-2  my-4 flex max-w-lg flex-col items-center rounded-md bg-gray-200 px-6 py-4 text-lg">
       <div className="flex items-center">
         <svg
           viewBox="0 0 24 24"
-          className="text-grey-600 w-5 h-5 sm:w-5 sm:h-5 mr-3"
+          className="text-grey-600 mr-3 h-5 w-5 sm:h-5 sm:w-5"
         >
           <path
             fill="currentColor"
@@ -20,18 +20,18 @@ function InfoAlert({ infoMsg = "No Results Found" }) {
       <div className="mt-4">
         <button
           type="button"
-          aria-label='Show all albums'
+          aria-label="Show all albums"
           onClick={() => {
-            setSearchInput("")
-            setFavoritesToggle(false)
+            setSearchInput("");
+            setFavoritesToggle(false);
           }}
-          className="bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm rounded-full px-5 py-2.5 w-40"
+          className="w-40 rounded-full bg-blue-600 px-5 py-2.5 text-sm text-white transition-all hover:bg-blue-700"
         >
           Show all albums
         </button>
       </div>
     </div>
-  )
+  );
 }
 
-export default InfoAlert
+export default InfoAlert;

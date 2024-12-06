@@ -1,16 +1,16 @@
 function AudioPlayer({ currentTrack }) {
   return (
-    <div className="p-4 rounded-lg shadow-md flex items-center">
+    <div className="flex items-center rounded-lg p-4 shadow-md">
       <audio
         key={currentTrack}
         controls
         autoPlay
-        className=" max-w-md rounded-lg bg-white w-full"
+        className="w-full max-w-md rounded-lg bg-white"
       >
         <source src={currentTrack} type="audio/mpeg" />
       </audio>
     </div>
-  )
+  );
 }
 
-export default AudioPlayer
+export default AudioPlayer;
